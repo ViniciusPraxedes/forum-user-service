@@ -29,6 +29,23 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
+    public String getProfilePic(String userId){
+        if (!userRepository.existsById(userId)){
+            throw new IllegalStateException("User not found");
+        }
+        else {
+            return userRepository.getReferenceById(userId).getProfilePic();
+        }
+    }
+
+    public void updateProfilePic(String userId, String profilePic){
+        if (!userRepository.existsById(userId)){
+            throw new IllegalStateException("User not found");
+        }
+        else {
+            userRepository.getReferenceById(userId).setProfilePic(profilePic);
+        }
+    }
 
     public ForumUser registerUser(ForumUserRequest request){
 
@@ -48,7 +65,6 @@ public class UserService {
 
         userRepository.save(forumUser);
 
-
         try{
             MimeMessage message = javaMailSender.createMimeMessage();
              message.setFrom("welcometosweden.org@hotmail.com");
@@ -60,6 +76,7 @@ public class UserService {
         } catch (MessagingException e) {
             throw new RuntimeException(e);
         }
+
 
 
 
@@ -81,7 +98,7 @@ public class UserService {
         return "<html><head><style>"
                 + "body { font-family: Arial, sans-serif; background-color: #f8f8f8; margin: 0; padding: 0; font-size: 16px; }"
                 + ".container { max-width: 600px; margin: 0 auto; background-color: #ffffff; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }"
-                + ".header { background-color: #014AAD; color: #FFDA00; padding: 20px; text-align: center; border-top-left-radius: 10px; border-top-right-radius: 10px; font-family: 'Pacifico', cursive; }"
+                + ".header { background-color: #014AAD; color: #FFDA00; padding: 20px; text-align: center; border-top-left-radius: 10px; border-top-right-radius: 10px;}"
                 + ".content { padding: 20px; }"
                 + ".message { padding: 20px; text-align: center; }"
                 + "</style></head><body>"

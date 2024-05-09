@@ -29,6 +29,16 @@ public class GlobalExceptionHandler {
 
     }
 
+    @ExceptionHandler(RuntimeException.class)
+    public ResponseEntity<?> handleRuntimeException(RuntimeException exception, WebRequest request){
+        String requestUri = ((ServletWebRequest)request).getRequest().getRequestURI().toString();
+
+        ExceptionMessage exceptionMessage = new ExceptionMessage(exception.getMessage(), requestUri);
+
+        return new ResponseEntity<>(exceptionMessage, new HttpHeaders(), HttpStatus.BAD_REQUEST);
+
+    }
+
     /*
 
     @ExceptionHandler(UsernameNotFoundException.class)

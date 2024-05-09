@@ -20,6 +20,14 @@ public class UserController {
         this.userService = userService;
     }
 
+    @GetMapping("/profilePic/{userId}")
+    public String getProfilePic(@PathVariable String userId){
+        return userService.getProfilePic(userId);
+    }
+    @PutMapping("/updateProfilePic/{userId}/{profilePic}")
+    public void getProfilePic(@PathVariable String userId, @PathVariable String profilePic){
+        userService.updateProfilePic(userId,profilePic);
+    }
     @PostMapping("/register")
     public ForumUser registerUser(@Valid @RequestBody ForumUserRequest request){
         return userService.registerUser(request);
