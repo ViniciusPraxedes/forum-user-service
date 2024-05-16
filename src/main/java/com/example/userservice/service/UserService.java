@@ -1,11 +1,13 @@
 package com.example.userservice.service;
 
+import com.example.userservice.model.ChangePictureDTO;
 import com.example.userservice.model.ForumUser;
 import com.example.userservice.model.ForumUserRequest;
 import com.example.userservice.model.LoginRequest;
 import com.example.userservice.repository.UserRepository;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
+import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
@@ -38,22 +40,49 @@ public class UserService {
         }
     }
 
-    public void updateProfilePic(String userId, String profilePic){
-        if (!userRepository.existsById(userId)){
+    public void updateProfilePic(ChangePictureDTO request){
+        if (!userRepository.existsById(request.getUserId())){
             throw new IllegalStateException("User not found");
         }
         else {
-            userRepository.getReferenceById(userId).setProfilePic(profilePic);
+            userRepository.getReferenceById(request.getUserId()).setProfilePic(request.getProfilePicture());
+            userRepository.save(userRepository.getReferenceById(request.getUserId()));
         }
     }
+
+
+
+
+
+
+
+
+
+
+
+    public ForumUser getUser(String userId){
+        return userRepository.findById(userId).get();
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     public ForumUser registerUser(ForumUserRequest request){
 
         if (userRepository.findUserByEmail(request.getEmail()).isPresent()){
             throw new IllegalStateException("Email taken");
         }
-
-
 
         ForumUser forumUser = ForumUser.builder()
                 .id(UUID.randomUUID().toString())
