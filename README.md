@@ -20,7 +20,7 @@ I created this website to help expats who are moving to Sweden with useful infor
 ## 🔧 Tech Stack
 
 - **Backend**: Java, Spring
-- **Frontend**: React (see [welcometosweden](https://github.com/ViniciusPraxedes/welcometosweden))
+- **Frontend**: React (see [welcometosweden.org](https://github.com/ViniciusPraxedes/welcometosweden))
 - **Hosting**: AWS
 
 ## 🌟 Live Demo
