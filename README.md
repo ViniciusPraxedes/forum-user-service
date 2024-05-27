@@ -30,7 +30,7 @@ Check out the live demo: [welcometosweden.onrender.com](https://welcometosweden.
 ## Repositories
 
 - **Forum Service**: [forum-service](https://github.com/ViniciusPraxedes/forum-service)
-- **User Service**: [forumUserService](https://github.com/ViniciusPraxedes/forum-user-service)
+- **User Service**: [forum-user-service](https://github.com/ViniciusPraxedes/forum-user-service)
 
 ## Getting Started
 
